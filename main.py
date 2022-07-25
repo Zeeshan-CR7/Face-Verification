@@ -1,15 +1,13 @@
 from mtcnn.mtcnn import MTCNN
-import cv2
 import numpy as np
 from keras_vggface.utils import preprocess_input
 from keras_vggface.vggface import VGGFace
 from scipy.spatial.distance import cosine, euclidean
 import warnings
 warnings.filterwarnings('ignore')
-import matplotlib.pyplot as plt
 import streamlit as st
 from PIL import Image
-from user_func import create_box, extract_face, get_embeddings, get_similarity
+from user_func import extract_face, get_embeddings, get_similarity
 
 def main():
     

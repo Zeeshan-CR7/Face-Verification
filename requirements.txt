@@ -1,0 +1,10 @@
+numpy
+tensorflow-cpu
+matplotlib
+mtcnn
+scipy
+keras_vggface
+keras_applications
+streamlit
+Pillow
+opencv-contrib-python

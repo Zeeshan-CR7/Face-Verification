@@ -1,1 +1,1 @@
-streamlit run .\main.py
+python z.py

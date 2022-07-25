@@ -1,6 +1,5 @@
 numpy
 tensorflow-cpu
-matplotlib
 mtcnn
 scipy
 keras_vggface

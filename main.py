@@ -29,17 +29,33 @@ def main():
             st.image(image2, width=300)
         filenames = [image1, image2]
 
-        faces = [extract_face(image) for image in filenames]
-        score, distance = get_similarity(faces)
+        try:
+            faces = [extract_face(image) for image in filenames]
+            score, distance = get_similarity(faces)
 
-        if (1 - score) > 0.60 and distance <= 100:
-            st.success('Face Matched!!')
-            st.write('Cosine Similarity--->', round((1 - score)*100, 2))
-            st.write('Euclidean Distance-->', round(distance, 2))
-        else:
-            st.error('Face Not Matched!!')
-            st.write('Cosine Similarity--->', round((1 - score)*100, 2))
-            st.write('Euclidean Distance-->', round(distance, 2))
+            if score < 0.40 and distance < 100:
+                st.success('Face Matched!!')
+                st.write('Cosine Similarity:', round(score, 2))
+                st.write('Euclidean Distance:>', round(distance, 2))
+            else:
+                st.error('Face Not Matched!!')
+                st.write('Cosine Similarity:', round(score, 2))
+                st.write('Euclidean Distance:', round(distance, 2))
+
+            st.info("Threshold for Face Match: [ Cosine Similarity < 0.4 ] & [ Euclidean Distance < 100 ]")
+
+            if st.button('Learn More!'):
+                st.image('Cosine & Euclidean.png')
+                st.write("""Cosine similarity measures the similarity between two vectors. 
+                It is measured by the cosine of the angle between two vectors and determines whether two vectors 
+                are pointing in the same direction. Cosine similarity of two documents will always range between 0 to 1. 
+                The closer the cosine value to 0, greater the match between vectors.""")
+                st.write("""Euclidean Distance represents the distance between any two points in an n-dimensional space. 
+                Since we are representing our images as image vectors they are nothing but a point in an n-dimensional 
+                space and we are going to use the euclidean distance to find the distance between them.""")
+        
+        except ValueError:
+            pass
     else:
         pass
 

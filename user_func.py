@@ -12,13 +12,16 @@ def extract_face(image, resize=(224, 224)):
     pixcels = np.asarray(image)
     detector = MTCNN()
     faces = detector.detect_faces(pixcels)
-    x1, y1, width, height = faces[0]['box']
-    x2, y2 = x1+width, y1+height
-    face_boundary = pixcels[y1:y2, x1:x2]
-    image = Image.fromarray(face_boundary)
-    image = image.resize((224, 224))
-    face_array = np.asarray(image)
-    return face_array
+    try:
+        x1, y1, width, height = faces[0]['box']
+        x2, y2 = x1+width, y1+height
+        face_boundary = pixcels[y1:y2, x1:x2]
+        image = Image.fromarray(face_boundary)
+        image = image.resize((224, 224))
+        face_array = np.asarray(image)
+        return face_array
+    except IndexError:
+        st.error('No face detected, Please try again with a different image')
 
 def get_embeddings(faces):
     face = np.asarray(faces, 'float32')
